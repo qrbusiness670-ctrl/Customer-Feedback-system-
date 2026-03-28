@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 20px; }
+    input, select, button { margin: 10px; padding: 10px; width: 80%; }
+    button { background: black; color: white; }
+  </style>
+</head>
+
+<body>
+
+<h2>Give Your Feedback</h2>
+
+<input type="text" id="table" placeholder="Table Number" required>
+<input type="text" id="phone" placeholder="Phone Number" required>
+
+<select id="experience">
+  <option value="">Select Experience</option>
+  <option>😃 Excellent</option>
+  <option>🙂 Good</option>
+  <option>😐 Average</option>
+  <option>😡 Bad</option>
+</select>
+
+<button onclick="submitForm()">Submit</button>
+
+<script>
+function submitForm() {
+  let table = document.getElementById("table").value;
+  let phone = document.getElementById("phone").value;
+  let exp = document.getElementById("experience").value;
+
+  // Google Form URL (replace with yours)
+  let formURL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
+
+  let data = new FormData();
+  data.append("entry.111111111", table);   // Table
+  data.append("entry.222222222", phone);   // Phone
+  data.append("entry.333333333", exp);     // Experience
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
+
+  // Redirect logic
+  if (exp === "😃 Excellent" || exp === "🙂 Good") {
+    window.location.href = "YOUR_GOOGLE_REVIEW_LINK";
+  } else {
+    alert("Thanks for your feedback ❤️");
+  }
+}
+</script>
+
+</body>
+</html>
